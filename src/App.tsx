@@ -5,14 +5,24 @@ import './App.css';
 // type AppPropseW = {
 //   word: string;
 // };
+let targetWord : string = "robot"
+
 
 function RenderWord({word} : {word: string}){
   let composedWord : JSX.Element[] = [];
-  for (let w of word) {
-    const composedLetter = <RenderLetter letter={w} color="None"/>
+  for (let index = 0; index < word.length; index++) {
+    const ith_letter = word[index];
+    const ith_target_letter = targetWord[index]
+    let composedLetter : JSX.Element = <RenderLetter letter={ith_letter} color="None"/>
+    if (ith_target_letter == ith_letter){
+      composedLetter = <RenderLetter letter={ith_letter} color="Green"/>
+    }
+    else if (targetWord.includes(ith_letter)){
+      composedLetter = <RenderLetter letter={ith_letter} color="Yellow"/>
+    }
     composedWord.push(composedLetter)
-  };
-  return <>{composedWord} </>
+  }
+  return <div>{composedWord} </div>
  }
 
 function WordList({list} : {list: string[]}) {
@@ -20,7 +30,13 @@ function WordList({list} : {list: string[]}) {
 }
 
 function RenderLetter({letter,color="None"}:{letter: string, color:string}) {
-  return <>{letter}</>
+  letter = letter.toUpperCase()
+  if(["Green","Yellow"].includes(color)){
+    return <span className={color}>{letter}</span>
+  }
+  else{
+    return <span>{letter}</span>
+  }
 }
 
 
@@ -28,7 +44,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <WordList list={["hola","mundo","cool"]}/>
+        <WordList list={["turbo","luces","holas","mundo","cools","robot"]}/>
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.

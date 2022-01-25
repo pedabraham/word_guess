@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+.Green {
+  background-color: Green;
+}
+
+.Yellow {
+  background-color: Orange;
+}
