@@ -1,4 +1,5 @@
 import React from 'react';
+import { useState } from 'react'
 import logo from './logo.svg';
 import './App.css';
 
@@ -39,11 +40,29 @@ function RenderLetter({letter,color="None"}:{letter: string, color:string}) {
   }
 }
 
+function WordInput() {
+  const [wordTarget,setTarget] = useState('')
+  function handleTarget(e: React.ChangeEvent<HTMLInputElement>) {
+    setTarget(e.target.value);
+  }
+  return (
+    <>
+    {wordTarget}
+      <input
+        value={wordTarget}
+        onChange={handleTarget}
+      />
+      <br />
+    </>
+  )
+}
+
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <WordInput />
         <WordList list={["turbo","luces","holas","mundo","cools","robot"]}/>
         <img src={logo} className="App-logo" alt="logo" />
         <p>
