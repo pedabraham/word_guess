@@ -15,7 +15,7 @@ function RenderWord({word} : {word: string}){
     const ith_letter = word[index];
     const ith_target_letter = targetWord[index]
     let composedLetter : JSX.Element = <RenderLetter letter={ith_letter} color="None"/>
-    if (ith_target_letter == ith_letter){
+    if (ith_target_letter === ith_letter){
       composedLetter = <RenderLetter letter={ith_letter} color="Green"/>
     }
     else if (targetWord.includes(ith_letter)){
@@ -42,17 +42,27 @@ function RenderLetter({letter,color="None"}:{letter: string, color:string}) {
 
 function WordInput() {
   const [wordTarget,setTarget] = useState('')
+  const [wordInput,setInput] = useState<string[]>([])
   function handleTarget(e: React.ChangeEvent<HTMLInputElement>) {
     setTarget(e.target.value);
   }
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setInput(arr => [...arr, wordTarget]);
+    setTarget('');
+    console.log(wordInput)
+  }
   return (
     <>
-    {wordTarget}
+    <WordList list={wordInput} />
+    <form onSubmit={handleSubmit}>
       <input
         value={wordTarget}
         onChange={handleTarget}
       />
+      <button type="submit">Subir</button>
       <br />
+    </form>
     </>
   )
 }
