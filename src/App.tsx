@@ -23,20 +23,20 @@ function RenderWord({word} : {word: string}){
     }
     composedWord.push(composedLetter)
   }
-  return <div>{composedWord} </div>
+  return <div className='line'>{composedWord} </div>
  }
 
 function WordList({list} : {list: string[]}) {
-  return <>{list.map(word => <RenderWord word={word} />)}</>
+  return <div>{list.map(word => <RenderWord word={word} />)}</div>
 }
 
 function RenderLetter({letter,color="None"}:{letter: string, color:string}) {
   letter = letter.toUpperCase()
   if(["Green","Yellow"].includes(color)){
-    return <span className={color}>{letter}</span>
+    return <span className={('Cuadrito ') + color}>{letter}</span>
   }
   else{
-    return <span>{letter}</span>
+    return <span className='Cuadrito'>{letter}</span>
   }
 }
 
@@ -69,11 +69,11 @@ function WordInput() {
 
 
 function App() {
+  //<WordList list={["turbo","luces","holas","mundo","cools","robot"]}/>
   return (
     <div className="App">
       <header className="App-header">
         <WordInput />
-        <WordList list={["turbo","luces","holas","mundo","cools","robot"]}/>
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
