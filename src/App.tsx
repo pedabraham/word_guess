@@ -6,7 +6,7 @@ import './App.css';
 // type AppPropseW = {
 //   word: string;
 // };
-let targetWord : string = "robot"
+let targetWord : string = "abeja"
 
 
 function RenderWord({word} : {word: string}){
@@ -44,12 +44,18 @@ function WordInput() {
   const [wordTarget,setTarget] = useState('')
   const [wordInput,setInput] = useState<string[]>([])
   function handleTarget(e: React.ChangeEvent<HTMLInputElement>) {
-    setTarget(e.target.value);
+    let word_str : string = e.target.value
+    if(word_str.length>5){
+      word_str = word_str.slice(0,5)
+    }
+    setTarget(word_str);
   }
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setInput(arr => [...arr, wordTarget]);
-    setTarget('');
+    if(wordTarget.length === 5){
+      setInput(arr => [...arr, wordTarget]);
+      setTarget('');
+    }
     console.log(wordInput)
   }
   return (
