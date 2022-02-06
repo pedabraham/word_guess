@@ -7,7 +7,7 @@ import './App.css';
 //   word: string;
 // };
 let targetWord : string = "abeja"
-
+let count : number = 0;
 
 function RenderWord({word} : {word: string}){
   let composedWord : JSX.Element[] = [];
@@ -40,9 +40,28 @@ function RenderLetter({letter,color="None"}:{letter: string, color:string}) {
   }
 }
 
+function RenderBoard({nlines} : {nlines : number}){
+  const clearRow = [1,1,1,1,1].map(x => <span className='Cuadrito'></span>)
+  const clearLine = (
+    <div className='line'>
+      {clearRow}
+    </div>
+  )
+  let clearBoard : JSX.Element[] = [];
+  for(let i=0; i<nlines; i++){
+    clearBoard.push(clearLine)
+  }
+  return (
+    <>
+      {clearBoard}
+    </>
+  )
+}
+
 function WordInput() {
   const [wordTarget,setTarget] = useState('')
   const [wordInput,setInput] = useState<string[]>([])
+  const [linesN,setLinesN] = useState<number>(6)
   function handleTarget(e: React.ChangeEvent<HTMLInputElement>) {
     let word_str : string = e.target.value
     if(word_str.length>5){
@@ -52,21 +71,23 @@ function WordInput() {
   }
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    if(wordTarget.length === 5){
+    if(wordTarget.length === 5 && linesN > 0){
       setInput(arr => [...arr, wordTarget]);
       setTarget('');
+      setLinesN(linesN-1)
     }
     console.log(wordInput)
   }
   return (
     <>
     <WordList list={wordInput} />
+    <RenderBoard nlines={linesN}/>
     <form onSubmit={handleSubmit}>
       <input
         value={wordTarget}
         onChange={handleTarget}
       />
-      <button type="submit">Subir</button>
+      <button type="submit">Enter</button>
       <br />
     </form>
     </>
@@ -79,19 +100,8 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <h1>WordG</h1>
         <WordInput />
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
     </div>
   );
