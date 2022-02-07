@@ -41,7 +41,7 @@ function RenderLetter({letter,color="None"}:{letter: string, color:string}) {
 }
 
 function RenderBoard({nlines} : {nlines : number}){
-  const clearRow = [1,1,1,1,1].map(x => <span className='Cuadrito'></span>)
+  const clearRow = [1,1,1,1,1].map(x => <span className='Cuadrito'>.</span>)
   const clearLine = (
     <div className='line'>
       {clearRow}
