@@ -26,7 +26,7 @@ function RenderWord({word} : {word: string}){
  }
 
 function WordList({list} : {list: string[]}) {
-  return <div>{list.map(word => <RenderWord word={word} />)}</div>
+  return <>{list.map(word => <RenderWord word={word} />)}</>
 }
 
 function RenderLetter({letter,color="None"}:{letter: string, color:string}) {
