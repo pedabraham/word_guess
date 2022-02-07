@@ -1,6 +1,5 @@
 import React from 'react';
 import { useState } from 'react'
-import logo from './logo.svg';
 import './App.css';
 
 // type AppPropseW = {
@@ -8,7 +7,7 @@ import './App.css';
 // };
 let targetWord : string = "abeja"
 let count : number = 0;
-
+console.log(count)
 function RenderWord({word} : {word: string}){
   let composedWord : JSX.Element[] = [];
   for (let index = 0; index < word.length; index++) {
